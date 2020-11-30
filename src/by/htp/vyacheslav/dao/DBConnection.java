@@ -1,5 +1,7 @@
 package by.htp.vyacheslav.dao;
 
+import by.htp.vyacheslav.controller.command.util.DBConfProperties;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,11 +10,11 @@ public class DBConnection {
 
     private static Connection connection = null;
 
-    private static String url = "jdbc:mysql://localhost:9000/quiz_java?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=UTF-8";
+    private static String url = DBConfProperties.getProperty("db.url");
 
-    private static String username = "root";
+    private static String username = DBConfProperties.getProperty("db.login");
 
-    private static String password = "root";
+    private static String password = DBConfProperties.getProperty("db.password");
 
 
     private DBConnection() {
@@ -26,7 +28,7 @@ public class DBConnection {
         }
 
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(DBConfProperties.getProperty("db.driver"));
             connection = DriverManager.getConnection(url, username, password);
         }catch (ClassNotFoundException ex1){
             throw new DaoException(ex1);
