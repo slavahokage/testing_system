@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import by.htp.vyacheslav.controller.command.util.HashGenerator;
 import by.htp.vyacheslav.dao.DBConnection;
 import by.htp.vyacheslav.dao.DaoException;
 import by.htp.vyacheslav.dao.UserDAO;
@@ -39,7 +40,7 @@ public class SQLUserDAO implements UserDAO{
 			preparedStatement.setString(1, userData.getLogin());
 			preparedStatement.setString(2, userData.getName());
 			preparedStatement.setString(3, userData.getSurname());
-			preparedStatement.setString(4, userData.getPassword());
+			preparedStatement.setString(4, HashGenerator.generateHash(userData.getPassword()));
 			preparedStatement.setString(5, userData.getEmail());
 			preparedStatement.setBoolean(6, userData.isAdmin());
 

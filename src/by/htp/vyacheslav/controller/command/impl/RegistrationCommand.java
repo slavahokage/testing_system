@@ -12,6 +12,7 @@ import by.htp.vyacheslav.entity.UserData;
 import by.htp.vyacheslav.service.ClientService;
 import by.htp.vyacheslav.service.ServiceException;
 import by.htp.vyacheslav.service.ServiceProvider;
+import by.htp.vyacheslav.service.validation.SignValidator;
 
 public class RegistrationCommand implements Command{
 
@@ -54,19 +55,22 @@ public class RegistrationCommand implements Command{
 		userData.setLogin(login);
 		userData.setPassword(password);
 
-		try {
-			boolean result = service.registration(userData);
+		synchronized (this) {
+			try {
+				boolean result = service.registration(userData);
 
-			if (result){
-				request.setAttribute("success", "Successfully register");
-			} else {
-				request.setAttribute("fault", "Fault to register");
+				if (result) {
+					request.setAttribute("success", "Successfully register");
+				} else {
+					request.setAttribute("errors", SignValidator.getErrors());
+				}
+
+			} catch (ServiceException e) {
+
+				request.setAttribute("exception", "Error. Try again! Login or email is already taken");
 			}
-
-		} catch (ServiceException e) {
-			request.setAttribute("error", "Error. Try again!");
 		}
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(REGISTRATION_PAGE);
 		dispatcher.forward(request, response);
 

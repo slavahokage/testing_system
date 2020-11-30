@@ -7,6 +7,9 @@ import by.htp.vyacheslav.entity.User;
 import by.htp.vyacheslav.service.ClientService;
 import by.htp.vyacheslav.service.ServiceException;
 import by.htp.vyacheslav.entity.UserData;
+import by.htp.vyacheslav.service.validation.SignValidator;
+
+import java.util.List;
 
 public class ClientServiceImpl implements ClientService{
 
@@ -31,9 +34,14 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	public boolean registration(UserData user) throws ServiceException{
-		
-		//validation
-		
+
+
+		boolean noError = SignValidator.validate(user);
+
+		if (!noError){
+			return false;
+		}
+
 		DAOProvider daoProvider = DAOProvider.getInstance();
 		UserDAO userDAO = daoProvider.getUserDAO();
 

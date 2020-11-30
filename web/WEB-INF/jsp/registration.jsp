@@ -1,5 +1,6 @@
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
@@ -43,14 +44,17 @@
 	<form action="controller" method="post">
 		<input type="hidden" name="command" value="registration">
 
-		<%-- ${enter_login}:  --%>
 
 
-	<h1>
+        <c:forEach var="error" items="${requestScope.errors}">
+            <c:out value="${error}" />
+            <c:out  value="${'<br>'}" escapeXml="false"/>
+        </c:forEach>
 
-	${requestScope.error}
     ${requestScope.success}
-    ${requestScope.fault}
+
+    ${requestScope.exception}
+
 	</h1>
 
 	<br>
