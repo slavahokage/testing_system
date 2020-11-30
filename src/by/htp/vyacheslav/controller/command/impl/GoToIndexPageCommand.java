@@ -13,7 +13,6 @@ public class GoToIndexPageCommand implements Command{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.getRequestDispatcher("/WEB-INF/jsp/main.jsp").forward(request, response);
 	}
 }

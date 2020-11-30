@@ -12,7 +12,13 @@
 
 <body>
 
-<a href="controller?command=go_to_registration">Registration</a>
+<c:if test="${cookie.user != null && cookie.persist != ''}">
+    <h5> You login as ${cookie['user'].value}</h5>
+</c:if>
+<ul>
+    <li><a href="controller?command=go_to_registration">Registration</a></li>
+    <li><a href="controller?command=go_to_authorization">Sign In</a></li>
+</ul>
 
 </body>
 

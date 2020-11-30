@@ -13,32 +13,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Insert title here</title>
+<title>Registration</title>
 </head>
 <body>
 
 
-	<fmt:setLocale value="${sessionScope.local}" />
-	<fmt:setBundle basename="resources.locale" var="loc" />
-	<fmt:message bundle = "${loc}" key = "locale.registration.enter_login_message" var="enter_login"/>
-	<fmt:message bundle = "${loc}" key = "locale.registration.enter_password_message" var="enter_login"/>
-	
-	 	<div align = "right"> 
-	  		<form action= "controller" method="post" > 
-				<input type="hidden" name="command" value="change_locale">
-				<input type="hidden" name="locale" value="ru">
-				<input type="submit" name="submit" value="ru" /> 
-			</form>
-	 		
-			<form action= "controller" method="post" > 
-				<input type="hidden" name="command" value="change_locale">
-				<input type="hidden" name="locale" value="eng">
-				<input type="submit" name="submit" value="eng" /> 
-			</form>
-			
-			
-		</div>
-
+<a href="controller?command=go_to_index">Main page</a>
 
 
 	<form action="controller" method="post">
@@ -54,11 +34,6 @@
     ${requestScope.success}
 
     ${requestScope.exception}
-
-	</h1>
-
-	<br>
-	<br>
 
         <table>
             <tr>

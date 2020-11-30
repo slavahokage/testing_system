@@ -1,5 +1,6 @@
 package by.htp.vyacheslav.service.impl;
 
+import by.htp.vyacheslav.controller.command.util.HashGenerator;
 import by.htp.vyacheslav.dao.DAOProvider;
 import by.htp.vyacheslav.dao.DaoException;
 import by.htp.vyacheslav.dao.UserDAO;
@@ -23,7 +24,7 @@ public class ClientServiceImpl implements ClientService{
 		User user = null;
 
 		try {
-			user = userDAO.authentification(login, password);
+			user = userDAO.authentification(login, HashGenerator.generateHash(password));
 		}catch (DaoException e){
 			throw new ServiceException(e);
 		}
@@ -50,6 +51,20 @@ public class ClientServiceImpl implements ClientService{
 		}catch (DaoException e){
 			throw new ServiceException(e);
 			
+		}
+
+	}
+
+	@Override
+	public User getUserByLogin(String login) throws ServiceException {
+		DAOProvider daoProvider = DAOProvider.getInstance();
+		UserDAO userDAO = daoProvider.getUserDAO();
+
+		try {
+			return userDAO.getUserByLogin(login);
+		}catch (DaoException e){
+			throw new ServiceException(e);
+
 		}
 
 	}

@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import by.htp.vyacheslav.controller.command.Command;
+import by.htp.vyacheslav.entity.User;
 import by.htp.vyacheslav.entity.UserData;
 import by.htp.vyacheslav.service.ClientService;
 import by.htp.vyacheslav.service.ServiceException;
@@ -61,6 +64,10 @@ public class RegistrationCommand implements Command{
 
 				if (result) {
 					request.setAttribute("success", "Successfully register");
+					User user = service.getUserByLogin(userData.getLogin());
+
+					response.addCookie(new Cookie("user", user.getLogin()));
+
 				} else {
 					request.setAttribute("errors", SignValidator.getErrors());
 				}

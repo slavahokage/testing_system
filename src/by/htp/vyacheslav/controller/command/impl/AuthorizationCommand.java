@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import by.htp.vyacheslav.controller.command.Command;
 import by.htp.vyacheslav.entity.User;
@@ -41,12 +43,13 @@ public class AuthorizationCommand implements Command{
 			
 			user = service.authorization(login, password);
 			
-			if (user==null) {
+			if (user == null) {
 				request.setAttribute("error", "login or password error");
 				page = DEFAULT_PAGE;
 			}else {
-				request.setAttribute("user", user);
-				page = MAIN_PAGE;
+				response.addCookie(new Cookie("user", user.getLogin()));
+				request.setAttribute("success", "Successfully login as " + user.getLogin());
+				page = DEFAULT_PAGE;
 			}
 
 		} catch (ServiceException e) {

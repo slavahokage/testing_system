@@ -9,7 +9,8 @@ public class User implements Serializable {
 	private String name;
 	private String surname;
 	private String email;
-	
+	private String login;
+	private Boolean admin = false;
 
 	public int getId() {
 		return id;
@@ -43,7 +44,21 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public Boolean getAdmin() {
+		return admin;
+	}
 
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
 	@Override
 	public int hashCode() {
@@ -53,6 +68,9 @@ public class User implements Serializable {
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((!admin) ? 0 : admin.hashCode());
 		return result;
 	}
 
@@ -78,18 +96,37 @@ public class User implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		
+
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+
 		if (surname == null) {
 			if (other.surname != null)
 				return false;
 		} else if (!surname.equals(other.surname))
 			return false;
+
+		if (admin == null) {
+			if (other.admin != null)
+				return false;
+		} else if (!admin.equals(other.admin))
+			return false;
+
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email 
-				+ "]";
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", surname='" + surname + '\'' +
+				", email='" + email + '\'' +
+				", login='" + login + '\'' +
+				", admin=" + admin +
+				'}';
 	}
 }
