@@ -12,8 +12,9 @@
 
 <body>
 
-<c:if test="${cookie.user != null && cookie.persist != ''}">
-    <h5> You login as ${cookie['user'].value}</h5>
+<c:if test="${sessionScope.user != null}">
+    <h5> You login as ${sessionScope.user}</h5>
+    <a href="controller?command=sign_out">sign out</a>
 </c:if>
 <ul>
     <li><a href="controller?command=go_to_registration">Registration</a></li>

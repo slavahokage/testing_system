@@ -66,7 +66,8 @@ public class RegistrationCommand implements Command{
 					request.setAttribute("success", "Successfully register");
 					User user = service.getUserByLogin(userData.getLogin());
 
-					response.addCookie(new Cookie("user", user.getLogin()));
+					HttpSession session=request.getSession();
+					session.setAttribute("user",user.getLogin());
 
 				} else {
 					request.setAttribute("errors", SignValidator.getErrors());

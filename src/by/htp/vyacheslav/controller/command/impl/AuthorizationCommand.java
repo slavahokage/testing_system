@@ -47,8 +47,14 @@ public class AuthorizationCommand implements Command{
 				request.setAttribute("error", "login or password error");
 				page = DEFAULT_PAGE;
 			}else {
-				response.addCookie(new Cookie("user", user.getLogin()));
-				request.setAttribute("success", "Successfully login as " + user.getLogin());
+
+				String userLogin = user.getLogin();
+
+				HttpSession session=request.getSession();
+
+				session.setAttribute("user", userLogin);
+
+				request.setAttribute("success", "Successfully login as " + userLogin);
 				page = DEFAULT_PAGE;
 			}
 

@@ -11,6 +11,7 @@ public class CommandProvider {
 	
 	public CommandProvider() {
 		commands.put("authorization", new AuthorizationCommand());
+		commands.put("sign_out", new SignOutCommand());
 		commands.put("go_to_authorization", new GoToAuthorizationCommand());
 		commands.put("go_to_registration", new GoToRegistrationCommand());
 		commands.put("registration", new RegistrationCommand());
