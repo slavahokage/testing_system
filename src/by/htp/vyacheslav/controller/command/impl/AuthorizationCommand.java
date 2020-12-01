@@ -22,7 +22,7 @@ public class AuthorizationCommand implements Command{
 
 	private static final String MAIN_PAGE = "/WEB-INF/jsp/main.jsp";
 	private static final String INDEX_PAGE = "/index.jsp"; // here was index.jsp
-	private static final String DEFAULT_PAGE = "/WEB-INF/jsp/default.jsp";
+	private static final String DEFAULT_PAGE = "/WEB-INF/jsp/authorization.jsp";
 
 
 	@Override
